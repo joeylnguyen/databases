@@ -16,7 +16,6 @@ describe('Persistent Node Chat Server', function() {
       database: 'chat'
     });
     dbConnection.connect();
-
     var tablename = 'messages'; // TODO: fill this out
 
     /* Empty the db table before each test so that multiple tests
@@ -33,23 +32,22 @@ describe('Persistent Node Chat Server', function() {
     request({
       method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/users',
-      json: { username: 'Valjean' }
+      json: { UserName: 'Valjean' }
     }, function () {
       // Post a message to the node chat server:
       request({
         method: 'POST',
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
-          username: 'Valjean',
-          message: 'In mercy\'s name, three days is all I need.',
-          roomname: 'Hello'
+          UserName: 'Valjean',
+          MessageText: 'In mercy\'s name, three days is all I need.',
+          RoomName: 'Hello'
         }
       }, function () {
         // Now if we look in the database, we should find the
         // posted message there.
 
         // TODO: You might have to change this test to get all the data from
-        // your message table, since this is schema-dependent.
         var queryString = 'SELECT * FROM messages';
         var queryArgs = [];
 
